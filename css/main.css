@@ -307,6 +307,7 @@ body {
 	font: 13px/20px 'OpenSansRegular';
 	color: #65686d;
 	overflow-x: hidden;
+	background: #e8e8e8;
 }
 
 
@@ -867,8 +868,8 @@ i.ita {
 
 .main {
 	margin: 0 auto;
-	background: #e8e8e8;
-	box-shadow: 0 0 2px rgba(0,0,0,0.2);
+
+
 }
 
 .main.boxed {
@@ -3618,7 +3619,7 @@ a.work-name:hover {
 
 .comment-date {
 	font: 12px 'OpenSansItalic';
-	color: #c9c9c9;
+	color: #d69c9c;
 }
 
 .btn-reply {

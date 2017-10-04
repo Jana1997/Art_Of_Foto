@@ -20,7 +20,7 @@ if (isset($_POST['login'])) {
         echo "Користувач з таким іменем вже існує в базі даних<br>";
 		$error=1;
     }else{
-		pg_query("INSERT INTO ".$table." (login, pass, fullname, email, description, avatar_path, count_post	) VALUES('".$login."','".md5($password)."','".$fullname."','".$email."','".$description."','http://ssl.gstatic.com/accounts/ui/avatar_2x.png','0');");
+		pg_query("INSERT INTO ".$table." (login, pass, fullname, email, description, avatar_path, anon_mess, anon_post, count_post	) VALUES('".$login."','".md5($password)."','".$fullname."','".$email."','".$description."','http://ssl.gstatic.com/accounts/ui/avatar_2x.png','0','0','0');");
 		$error=0;
 	}
 	header("Location: ".$page."?error=".$error);

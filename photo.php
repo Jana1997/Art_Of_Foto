@@ -22,6 +22,7 @@ if ($_SESSION['language'] == '2') {
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-lightbox/0.7.0/bootstrap-lightbox.min.css">
         <link href="css/main.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
+        <link href="css/comment.css" rel="stylesheet">
 
         <script src="js/jquery-1.9.1.min.js"></script> 
 		<script src="js/jquery.js"></script> 
@@ -586,16 +587,39 @@ if (isset($_GET['error'])) {
 				})();
 			  </script>
 			</section>
-			<h2 align=center style="font: 17px/23px 'FontAwesome';font-family: OpenSansItalic; margin-top:5px;">"<?php echo $foto[4]; ?>"</h2>
-
-  
+			<div class="col-lg-12 col-md-12 col-xs-12" align=center style="font: 17px/23px 'FontAwesome';font-family: OpenSansItalic; margin-top:5px;">"<?php echo $foto[4]; ?>"</div>
+			<div class="col-lg-12 col-md-12 col-xs-12" style="font: 20px ''; margin-top:5px;">
+			<button id="btn_show" type="button" class="btn btn-grey btn-lg btn-block" onclick="show_comments()" >
+			COMMENTS  <i class="fa fa-comments-o" aria-hidden="true">13</i>
+			</button>
+			<button id="btn_hide" type="button" class="btn btn-grey btn-lg btn-block" onclick="hide_comments()" >
+			COMMENTS  <i class="fa fa-comments-o" aria-hidden="true">13</i>
+			</button>
+			<script type="text/javascript">
+				function show_comments() {
+					document.getElementById('comments').style.display = 'inline';	
+					document.getElementById('btn_hide').style.display = 'inline';	
+					document.getElementById('btn_show').style.display = 'none';	
+					}				
+					function hide_comments() {
+					document.getElementById('comments').style.display = 'none';	
+					document.getElementById('btn_hide').style.display = 'none';	
+					document.getElementById('btn_show').style.display = 'inline';	
+					}
+			</script>
+			<?php
+			include 'comments.php';
+			?>
+			</div>
+			 
 			</div>
 			<div class="col-lg-4 col-md-12 col-xs-12 PHOTOGRAPHER_DETAILS" style="">
+				
 				<h3 align=center style="font: 22px/25px 'FontAwesome'; border-bottom: 2px solid #938ca5; border-top: 1px solid #938ca5;"><?php echo $photografer_details;?></h3>
-				<img id="profile_image" class="profile_image" style="width:60%;" src="<?php echo $_SESSION['user']['avatar_path']; ?>">
-				<h2 align=center style="font: 22px/30px 'FontAwesome';"> <?php echo $_SESSION['user']['fullname']; ?> </h2>
-				<h2 align=center style="font: 22px/30px 'FontAwesome';"> <?php echo $_SESSION['user']['email']; ?> </h2>
-				<h2 align=center style="font: 17px/23px 'FontAwesome';font-family: sans-serif;">"<?php echo $_SESSION['user']['description']; ?>"</h2>
+				<img id="profile_image" class="profile_image" style="width:60%;" src="<?php echo $user[7]; ?>">
+				<h2 align=center style="font: 22px/30px 'FontAwesome';"> <?php echo $user[3]; ?> </h2>
+				<h2 align=center style="font: 22px/30px 'FontAwesome';"> <?php echo $user[4]; ?> </h2>
+				<h2 align=center style="font: 17px/23px 'FontAwesome';font-family: sans-serif;">"<?php echo $user[5]; ?>"</h2>
 			</div>
 			
             </div>

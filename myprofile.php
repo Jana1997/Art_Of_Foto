@@ -514,6 +514,7 @@ if (isset($_GET['error'])) {
             <!-- END HEADER 
             ============================================= --> 
 			<?php if ($_SESSION['auth'] == true) { ?>	
+			
             <div class="container"  style="padding-bottom: 60px;">
 			<div class="col-lg-3 col-md-6 col-xs-12">
 			 <form class="form-signin" style="    background: #968887; padding: 10px; margin-top: 50px; margin-bottom: 5px; border: 0.5px solid #938ca5;" method="post" action="new_post.php" enctype="multipart/form-data" >
@@ -540,12 +541,20 @@ if (isset($_GET['error'])) {
 		   </form><!-- /form -->
 		   </div>
 		   <div class="col-lg-6 col-md-12 col-xs-12">
-			<h3 align="center" style="font: 35px/40px 'FontAwesome'; border-bottom: 3px solid #938ca5; border-top: 3px solid #938ca5;"><?php echo $your_posts; ?></h3>
+			<h3 align="center" style="font: 35px/40px 'FontAwesome'; border-bottom: 3px solid #938ca5; border-top: 3px solid #938ca5;"><?php if (isset($_GET['id'])){ echo $postss; }else{ echo $your_posts;} ?></h3>
 			<?php
+			$id_users=$_SESSION['user']['id_user'];
+			if (isset($_GET['id'])){
+				$id_users=$_GET['id'];
+			}
 			include_once 'db_connect.php';
 			$table1='"Foto"';
 			$table2='"Foto_details"';
-			$result = pg_query("SELECT * FROM ".$table2." WHERE id_user='".$_SESSION['user']['id_user']."' ORDER BY id_foto;") or die(pg_last_error());
+			if (isset($_GET['id'])){
+				$result = pg_query("SELECT * FROM ".$table2." WHERE id_user='".$id_users."' AND anon_post='0' ORDER BY id_foto;") or die(pg_last_error());
+			}else{
+				$result = pg_query("SELECT * FROM ".$table2." WHERE id_user='".$id_users."' ORDER BY id_foto;") or die(pg_last_error());	
+			}
 			while($foto_details = pg_fetch_array($result)){ 
 				$result1 = pg_query("SELECT * FROM ".$table1." WHERE id_foto='".$foto_details[0]."' ;") or die(pg_last_error());
 				$foto = pg_fetch_row($result1,0);
@@ -586,10 +595,25 @@ if (isset($_GET['error'])) {
 			</div>
 			<div class="col-lg-3 col-md-6 col-xs-12 PHOTOGRAPHER_DETAILS" style="">
 				<h3 align=center style="font: 23px/28px 'FontAwesome'; border-bottom: 2px solid #938ca5"><?php echo $photografer_details;?></h3>
+				<?php
+				if (isset($_GET['id'])){
+				$id_users=$_GET['id'];
+				$table='"Users"';
+				$result2 = pg_query("SELECT * FROM ".$table." WHERE id_user='".$id_users."' ;") or die(pg_last_error());
+				$user = pg_fetch_row($result2,0);
+				?>
+				<img id="profile_image" class="profile_image" style="width:60%;" src="<?php echo $user[7]; ?>">
+				<h2 align=center style="font: 22px/30px 'FontAwesome';"> <?php echo $user[3]; ?> </h2>
+				<h2 align=center style="font: 22px/30px 'FontAwesome';"> <?php echo $user[4]; ?> </h2>
+				<h2 align=center style="font: 17px/23px 'FontAwesome';font-family: sans-serif;">"<?php echo $user[5]; ?>"</h2>
+				<?php 
+				}else{
+				?>
 				<img id="profile_image" class="profile_image" src="<?php echo $_SESSION['user']['avatar_path']; ?>">
 				<h2 align=center style="font: 22px/30px 'FontAwesome';"> <?php echo $_SESSION['user']['fullname']; ?> </h2>
 				<h2 align=center style="font: 22px/30px 'FontAwesome';"> <?php echo $_SESSION['user']['email']; ?> </h2>
 				<h2 align=center style="font: 17px/23px 'FontAwesome';font-family: sans-serif;">"<?php echo $_SESSION['user']['description']; ?>"</h2>
+				<?php } ?>
 			</div>
               <!--  <div style="min-height: 2000px">
                     <h1></h1>

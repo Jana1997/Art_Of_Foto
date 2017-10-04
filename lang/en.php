@@ -42,6 +42,7 @@ $off='OFF';
 $change_info='Change User Information';
 $success_change_info='You have successfully changed password User information';
 $your_posts="Your POST'S";
+$postss="POST'S";
 $form_new_post="Complete form to add a new post";
 $post_title="Enter post's title";
 $post_description="Enter posts description";

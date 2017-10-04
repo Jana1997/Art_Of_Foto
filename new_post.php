@@ -72,7 +72,6 @@ if(empty($imgFile)){
 	$id_foto = pg_fetch_row($result1,0);
 	$query="INSERT INTO ".$table2." (id_foto, id_user, date, time, description, categories, anon_post) VALUES('".$id_foto[0]."','".$_SESSION['user']['id_user']."','".$date."','".$time."','".$description."','{null}','".$_SESSION['user']['anon_post']."');";
 	pg_query($query);
-
 	header("Location: ".$page);
    }
    else
